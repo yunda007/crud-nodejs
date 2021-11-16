@@ -9,6 +9,7 @@ const app = express();
 // importing routes
 const customerRoutes = require('./routes/customer');
 const inicioRoutes = require('./routes/index')
+const admin_contRoutes = require('./routes/admin')
 
 // settings
 app.set('port', process.env.PORT || 3000);
@@ -29,6 +30,7 @@ app.use(express.urlencoded({extended: false}));
 // routes
 app.use('/custumer', customerRoutes);
 app.use('/', inicioRoutes);
+app.use('/admin_cont', admin_contRoutes);
 
 // static files
 app.use(express.static(path.join(__dirname, 'public')));

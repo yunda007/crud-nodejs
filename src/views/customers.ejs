@@ -1,57 +1,40 @@
 <% include partials/_header %>
-
-<div class="container mt-5">
-  <div class="row">
-    <div class="col-md-7">
-      <table class="table table-bordered table-hover">
-        <thead>
-          <tr>
-            <td>n°</td>
-            <td>Nombre</td>
-            <td>Direccion</td>
-            <td>Telefono</td>
-            <td>Acciones</td>
-          </tr>
-        </thead>
-        <tbody>
-          <% if (data) { %>
-            <% for(var i = 0; i < data.length; i++) { %>
-              <tr>
-                <td><%= (i + 1) %></td>
-                <td><%= data[i].name %></td>
-                <td><%= data[i].address %></td>
-                <td><%= data[i].phone %></td>
-                <td>
-                  <a href="/update/<%= data[i].id %>" class="btn btn-info">Edit</a>
-                  <a href="/delete/<%= data[i].id %>" class="btn btn-danger">Delete</a>
-                </td>
-              </tr>
-            <% } %>
-          <% } %>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-md-5">
-      <div class="card-body">
-
-        <form action="/add" method="POST">
-          <div class="form-group">
-            <input type="text" name="name" placeholder="Nombre" class="form-control" autofocus>
+  <div class="container mt-5">
+      <div class="row">
+        
+        <div class="col-md-5">
+          <h1>AGREGAR CONTACTOS</h1>
+          <div class="card-body">
+            
+            <form action="/custumer/add" method="POST">
+              <br>
+              <div class="form-group">
+                <input type="text" name="name" placeholder="Nombre" class="form-control" autofocus>
+              </div>
+              <br>
+              <div class="form-group">
+                <input type="text" name="address" placeholder="Direccion" class="form-control">
+              </div>
+              <br>
+              <div class="form-group">
+                <input type="text" name="phone" placeholder="Telefono" class="form-control">
+              </div>
+              <br>
+              <button type="submit" class="btn btn-dark">
+                Guardar
+              </button>
+            </form>
           </div>
-          <div class="form-group">
-            <input type="text" name="address" placeholder="Direccion" class="form-control">
-          </div>
-          <div class="form-group">
-            <input type="text" name="phone" placeholder="Telefono" class="form-control">
-          </div>
+        </div>
+        <div class="col-md-2">
 
-          <button type="submit" class="btn btn-primary">
-            Guardar
-          </button>
-        </form>
+        </div>
+        
+        <div class="col-md-5">
+          <br>
+          <br>
+          <img src="data:image/png;base64,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">
+        </div>
       </div>
-    </div>
   </div>
-</div>
-
 <% include partials/_footer %>
